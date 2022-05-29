@@ -1,0 +1,73 @@
+---
+format_version: 10
+pipelines:
+  node-microservice:
+    group: microservices
+    materials:
+      mainGit:
+        git: https://github.com/mtararujs/ci_course
+        branch: main
+    stages:
+      - build:
+          jobs:
+            build:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - echo "Building node application"
+      - deploy-dev:
+          jobs:
+            deploy:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - echo "Deployment on DEV environment triggered... "
+      - test-dev:
+          jobs:
+            test:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - echo "Running tests on DEV environment"
+      - deploy-int:
+          jobs:
+            deploy:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - echo "Deployment on INT environment triggered... "
+      - test-int:
+          jobs:
+            test:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - echo "Running tests on INT environment"
+      - deploy-prd:
+          jobs:
+            deploy:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - echo "Deployment on PRD environment triggered... "
+      - test-prd:
+          jobs:
+            test:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - echo "Running tests on PRD environment"
