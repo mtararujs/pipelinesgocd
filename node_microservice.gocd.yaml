@@ -1,12 +1,18 @@
 ---
 format_version: 10
 common:
-  deploy-task: &deploy-tasks
+  deploy-tasks: &deploy-tasks
     - exec:
         command: bash
         arguments:
           - -c
           - echo "Deployment on ${ENV_NAME} environment triggered... "
+  test-tasks: &test-tasks
+    - exec:
+        command: bash
+        arguments:
+          - -c
+          - echo "Running tests on ${ENV_NAME} environment"
 
 pipelines:
   node-microservice:
@@ -32,14 +38,11 @@ pipelines:
             deploy:
               tasks: *deploy-tasks
       - test-dev:
+          environment_variables:
+            ENV_NAME: DEV
           jobs:
             test:
-              tasks:
-              - exec:
-                  command: bash
-                  arguments:
-                    - -c
-                    - echo "Running tests on DEV environment"
+              tasks: *test-tasks
       - deploy-int:
           environment_variables:
             ENV_NAME: INT
@@ -47,14 +50,11 @@ pipelines:
             deploy:
               tasks: *deploy-tasks
       - test-int:
+          environment_variables:
+            ENV_NAME: INT
           jobs:
             test:
-              tasks:
-              - exec:
-                  command: bash
-                  arguments:
-                    - -c
-                    - echo "Running tests on INT environment"
+              tasks: *test-tasks
       - deploy-prd:
           environment_variables:
             ENV_NAME: PRD
@@ -62,11 +62,8 @@ pipelines:
             deploy:
               tasks: *deploy-tasks
       - test-prd:
+          environment_variables:
+            ENV_NAME: PRD
           jobs:
             test:
-              tasks:
-              - exec:
-                  command: bash
-                  arguments:
-                    - -c
-                    - echo "Running tests on PRD environment"
+              tasks: *test-tasks
