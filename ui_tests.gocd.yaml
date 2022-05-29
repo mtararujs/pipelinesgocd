@@ -6,6 +6,7 @@ pipelines:
     materials:
       testrepo:
         git: https://github.com/mtararujs/ci_course
+        branch: main
     environment_variables:
       TEST_ENVIRONMENT: dev
     stages:
