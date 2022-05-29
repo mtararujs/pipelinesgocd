@@ -18,11 +18,11 @@ pipelines:
                   command: bash
                   arguments:
                     - -c
-                    - "Running UI tests on ${TEST_ENVIRONMENT} environent and chrome browser"
+                    - echo "Running UI tests on ${TEST_ENVIRONMENT} environent and chrome browser"
             test-firefox:
               tasks:
               - exec:
                   command: bash
                   arguments:
                     - -c
-                    - "Running UI tests on ${TEST_ENVIRONMENT} environent and firefox browser"
+                    - echo "Running UI tests on ${TEST_ENVIRONMENT} environent and firefox browser"
