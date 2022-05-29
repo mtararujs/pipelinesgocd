@@ -1,0 +1,27 @@
+---
+format_version: 10
+pipelines:
+  ui-tests:
+    group: tests
+    materials:
+      testrepo:
+        git: https://github.com/mtararujs/ci_course
+    environment_variables:
+      TEST_ENVIRONMENT: dev
+    stages:
+      - test:
+          jobs:
+            test-chrome:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - "Running UI tests on ${TEST_ENVIRONMENT} environent and chrome browser"
+            test-firefox:
+              tasks:
+              - exec:
+                  command: bash
+                  arguments:
+                    - -c
+                    - "Running UI tests on ${TEST_ENVIRONMENT} environent and firefox browser"
