@@ -22,13 +22,15 @@ common:
         command: bash
         arguments:
           - -c
-          - docker exec api_test_executor_${ENV_NAME} cucumber --tags=@${ENV_NAME} --format html --out test-output/report.html
+          - docker exec api_test_executor_${ENV_NAME} cucumber --format html --out test-output/report.html
     - exec:
+        run_if: any
         command: bash
         arguments:
           - -c
           - docker cp api_test_executor_${ENV_NAME}:/usr/src/api-tests/test-output/report.html report_${ENV_NAME}.html
     - exec:
+        run_if: any
         command: bash
         arguments:
           - -c
